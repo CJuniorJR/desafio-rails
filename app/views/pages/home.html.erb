@@ -1,6 +1,37 @@
 <h1>Pages#home</h1>
 
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Sobrenome</th>
+    <th>Email</th>
+    <th>Active</th>
+    <% if current_user %>
+        <th>Ações</th>
+    <% end %>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.surname %></td>
+      <td><%= user.email %></td>
+      <td><%= user.active %></td>
+      <% if current_user %>
+        <% if user.active %>
+            <td><%= link_to "Desativar", deactivate_user_path(user), method: :put %></td>
+        <% end %>
+        <% if !user.active %>
+            <td><%= link_to "Ativar", activate_user_path(user), method: :put %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
 
-<%= link_to 'Sign up', new_user_registration_path %>
+<% if !current_user %>
+    <%= link_to "Log in", new_user_session_path %>
+    <%= link_to 'Sign up', new_user_registration_path %>
+<% end %>
 
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
