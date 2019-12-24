@@ -1,11 +1,11 @@
-<h1>Pages#home</h1>
+<h1>Lista de Usuarios</h1>
 
 <table>
   <tr>
     <th>Nome</th>
     <th>Sobrenome</th>
     <th>Email</th>
-    <th>Active</th>
+    <th>Status</th>
     <% if current_user %>
         <th>Ações</th>
     <% end %>
@@ -16,15 +16,22 @@
       <td><%= user.name %></td>
       <td><%= user.surname %></td>
       <td><%= user.email %></td>
-      <td><%= user.active %></td>
+
+      <% if user.active %>  
+        <td>Ativo</td>
+      <% else %>
+        <td>Inativo</td>
+      <% end %>
+      
       <% if current_user %>
         <% if user.active %>
-            <td><%= link_to "Desativar", deactivate_user_path(user), method: :put %></td>
+            <td><%= link_to "Desativar", user_active_flag_path(user), method: :put %></td>
         <% end %>
         <% if !user.active %>
-            <td><%= link_to "Ativar", activate_user_path(user), method: :put %></td>
+            <td><%= link_to "Ativar", user_active_flag_path(user), method: :put %></td>
         <% end %>
       <% end %>
+
     </tr>
   <% end %>
 </table>
@@ -34,4 +41,6 @@
     <%= link_to 'Sign up', new_user_registration_path %>
 <% end %>
 
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+<%= link_to "Editar meu usuario", edit_user_registration_path  %>
+
+<%= link_to 'Sair', destroy_user_session_path, method: :delete %>
