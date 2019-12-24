@@ -17,10 +17,6 @@ class User < ApplicationRecord
 
   validates :password, presence: true, format: { with: PASSWORD_FORMAT }
 
-  def destroy
-    update_attributes(active: false) unless active
-  end
-
   def active_for_authentication?
     super && active
   end
