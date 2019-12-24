@@ -22,7 +22,7 @@
       <% else %>
         <td>Inativo</td>
       <% end %>
-      
+
       <% if current_user %>
         <% if user.active %>
             <td><%= link_to "Desativar", user_active_flag_path(user), method: :put %></td>
@@ -37,8 +37,8 @@
 </table>
 
 <% if !current_user %>
-    <%= link_to "Log in", new_user_session_path %>
-    <%= link_to 'Sign up', new_user_registration_path %>
+    <%= link_to "Entrar", new_user_session_path %>
+    <%= link_to 'Cadastrar-se', new_user_registration_path %>
 <% end %>
 
 <%= link_to "Editar meu usuario", edit_user_registration_path  %>
