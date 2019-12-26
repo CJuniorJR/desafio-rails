@@ -24,9 +24,11 @@
         <%= link_to 'Cadastrar-se', new_user_registration_path, :class => "btn btn-primary" %>
       </button>
     <% end %>
-    <button class="navbar-text btn">
-      <%= link_to 'Sair', destroy_user_session_path, method: :delete, :class => "btn btn-danger" %>
-    </button>
+    <% if current_user %>
+      <button class="navbar-text btn">
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete, :class => "btn btn-danger" %>
+      </button>
+    <% end %>
   </div>
 </nav>
 
@@ -56,10 +58,10 @@
 
       <% if current_user %>
         <% if user.active %>
-            <td><%= link_to "Desativar", user_active_flag_path(user), method: :put %></td>
+            <td><%= link_to "Desativar", user_active_flag_path(user), method: :patch %></td>
         <% end %>
         <% if !user.active %>
-            <td><%= link_to "Ativar", user_active_flag_path(user), method: :put %></td>
+            <td><%= link_to "Ativar", user_active_flag_path(user), method: :patch %></td>
         <% end %>
       <% end %>
 
